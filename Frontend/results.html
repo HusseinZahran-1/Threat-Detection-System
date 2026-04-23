@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results - ThreatShield AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>ThreatShield</h2>
+                        <p>Security Dashboard</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="results.html" class="nav-item active">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analysis Results</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-bolt"></i>
+                    <span>Real-time Monitor</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-history"></i>
+                    <span>File History</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <strong>John Smith</strong>
+                        <span>Administrator</span>
+                    </div>
+                </div>
+                <button class="btn btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <h1>Analysis Results</h1>
+                    <p class="subtitle">Detailed threat analysis and detection results</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="exportAllResults()">
+                        <i class="fas fa-file-export"></i>
+                        Export All Results
+                    </button>
+                    <button class="btn btn-secondary" onclick="showUploadModal()">
+                        <i class="fas fa-upload"></i>
+                        New Analysis
+                    </button>
+                </div>
+            </header>
+
+            <!-- Results Summary -->
+            <section class="results-summary">
+                <div class="summary-card critical">
+                    <div class="summary-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>Critical Threats</h3>
+                        <span class="summary-value">3</span>
+                        <span class="summary-change">
+                            <i class="fas fa-arrow-up"></i>
+                            +1 from yesterday
+                        </span>
+                    </div>
+                </div>
+                <div class="summary-card warning">
+                    <div class="summary-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>Warnings</h3>
+                        <span class="summary-value">8</span>
+                        <span class="summary-change">
+                            <i class="fas fa-arrow-up"></i>
+                            +2 from yesterday
+                        </span>
+                    </div>
+                </div>
+                <div class="summary-card safe">
+                    <div class="summary-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>Safe Files</h3>
+                        <span class="summary-value">45</span>
+                        <span class="summary-change">
+                            <i class="fas fa-arrow-up"></i>
+                            +12 from yesterday
+                        </span>
+                    </div>
+                </div>
+                <div class="summary-card total">
+                    <div class="summary-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>Total Analysis</h3>
+                        <span class="summary-value">56</span>
+                        <span class="summary-change">
+                            <i class="fas fa-arrow-up"></i>
+                            +15 from yesterday
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Controls -->
+            <section class="results-controls">
+                <div class="controls-left">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search analysis results...">
+                    </div>
+                    <div class="filter-dropdown">
+                        <select id="resultsFilter" onchange="filterResults()">
+                            <option value="all">All Results</option>
+                            <option value="critical">Critical Only</option>
+                            <option value="warning">Warnings Only</option>
+                            <option value="safe">Safe Only</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="controls-right">
+                    <div class="sort-dropdown">
+                        <select id="resultsSort" onchange="sortResults()">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="severity">Severity</option>
+                            <option value="filename">File Name</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-outline" onclick="refreshResults()">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh
+                    </button>
+                </div>
+            </section>
+
+            <!-- Results Table -->
+            <section class="results-table-section">
+                <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="selectAll" onchange="toggleSelectAll()">
+                                </th>
+                                <th>File Name</th>
+                                <th>Analysis Date</th>
+                                <th>Status</th>
+                                <th>Threat Type</th>
+                                <th>Confidence</th>
+                                <th>File Size</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody">
+                            <!-- Results will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Table Footer -->
+                <div class="table-footer">
+                    <div class="footer-left">
+                        <span id="selectedCount">0 items selected</span>
+                    </div>
+                    <div class="footer-right">
+                        <div class="pagination">
+                            <button class="btn btn-outline" onclick="previousPage()">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="page-info">Page 1 of 5</span>
+                            <button class="btn btn-outline" onclick="nextPage()">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-upload"></i>
+                    Upload Files for Analysis
+                </h3>
+                <button class="close" onclick="closeUploadModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <p>Drag & drop your log files here or click to browse</p>
+                    <p class="upload-info">Supported formats: CSV, JSON, TXT, LOG (Max 100MB)</p>
+                    <input type="file" id="fileInput" multiple accept=".csv,.json,.txt,.log" style="display: none;">
+                    <button class="btn btn-outline" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-folder-open"></i>
+                        Browse Files
+                    </button>
+                </div>
+                <div class="file-list" id="fileList"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeUploadModal()">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+                <button class="btn btn-primary" onclick="analyzeFiles()" id="analyzeBtn" disabled>
+                    <i class="fas fa-play"></i>
+                    Analyze Files
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-search"></i>
+                    Analysis Details
+                </h3>
+                <button class="close" onclick="closeDetailModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="detail-content" id="detailContent">
+                    <!-- Detail content will be populated by JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDetailModal()">
+                    <i class="fas fa-times"></i>
+                    Close
+                </button>
+                <button class="btn btn-primary" onclick="exportSingleResult()">
+                    <i class="fas fa-file-export"></i>
+                    Export Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/results.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

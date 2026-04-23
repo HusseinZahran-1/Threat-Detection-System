@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ThreatShield AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>ThreatShield</h2>
+                        <p>Security Dashboard</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="results.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analysis Results</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-bolt"></i>
+                    <span>Real-time Monitor</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-history"></i>
+                    <span>File History</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Team Management</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Reports</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <strong>John Smith</strong>
+                        <span>Administrator</span>
+                    </div>
+                </div>
+                <button class="btn btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <h1>Security Dashboard</h1>
+                    <p class="subtitle">Welcome back, John. Here's your security overview.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="showUploadModal()">
+                        <i class="fas fa-upload"></i>
+                        New Analysis
+                    </button>
+                    <div class="header-controls">
+                        <div class="notification-bell">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-count">3</span>
+                        </div>
+                        <div class="status-indicator online">
+                            <i class="fas fa-circle"></i>
+                            System Online
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Overview -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon threat">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Active Threats</h3>
+                        <span class="stat-value">12</span>
+                        <span class="stat-change up">
+                            <i class="fas fa-arrow-up"></i>
+                            2 today
+                        </span>
+                    </div>
+                    <div class="stat-trend">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon safe">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Safe Files</h3>
+                        <span class="stat-value">156</span>
+                        <span class="stat-change up">
+                            <i class="fas fa-arrow-up"></i>
+                            15 today
+                        </span>
+                    </div>
+                    <div class="stat-trend">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon analysis">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Analysis</h3>
+                        <span class="stat-value">189</span>
+                        <span class="stat-change up">
+                            <i class="fas fa-arrow-up"></i>
+                            18 today
+                        </span>
+                    </div>
+                    <div class="stat-trend">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon accuracy">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Accuracy Rate</h3>
+                        <span class="stat-value">98.2%</span>
+                        <span class="stat-change up">
+                            <i class="fas fa-arrow-up"></i>
+                            0.5%
+                        </span>
+                    </div>
+                    <div class="stat-trend">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Content Grid -->
+            <div class="content-grid">
+                <!-- Recent Activity -->
+                <section class="recent-activity">
+                    <div class="section-header">
+                        <h3>
+                            <i class="fas fa-clock"></i>
+                            Recent Activity
+                        </h3>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item threat">
+                            <div class="activity-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="activity-details">
+                                <strong>Malicious IP detected</strong>
+                                <span>192.168.1.105 - High confidence threat</span>
+                                <small>2 minutes ago</small>
+                            </div>
+                            <div class="activity-actions">
+                                <button class="btn-action view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="activity-item safe">
+                            <div class="activity-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="activity-details">
+                                <strong>File analysis completed</strong>
+                                <span>access_log.csv - No threats found</span>
+                                <small>15 minutes ago</small>
+                            </div>
+                            <div class="activity-actions">
+                                <button class="btn-action view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="activity-item warning">
+                            <div class="activity-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="activity-details">
+                                <strong>Suspicious activity detected</strong>
+                                <span>Multiple failed login attempts from IP</span>
+                                <small>1 hour ago</small>
+                            </div>
+                            <div class="activity-actions">
+                                <button class="btn-action view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="activity-item info">
+                            <div class="activity-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="activity-details">
+                                <strong>System update completed</strong>
+                                <span>AI model v2.1.3 deployed successfully</span>
+                                <small>2 hours ago</small>
+                            </div>
+                            <div class="activity-actions">
+                                <button class="btn-action view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Threat Distribution -->
+                <section class="threat-distribution">
+                    <div class="section-header">
+                        <h3>
+                            <i class="fas fa-chart-pie"></i>
+                            Threat Distribution
+                        </h3>
+                        <div class="time-filter">
+                            <select id="threatTimeFilter">
+                                <option value="24h">Last 24 Hours</option>
+                                <option value="7d" selected>Last 7 Days</option>
+                                <option value="30d">Last 30 Days</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="distribution-content">
+                        <div class="threat-chart">
+                            <div class="chart-visual">
+                                <div class="pie-chart">
+                                    <div class="chart-segment malware" style="--percentage: 45;"></div>
+                                    <div class="chart-segment intrusion" style="--percentage: 30;"></div>
+                                    <div class="chart-segment phishing" style="--percentage: 15;"></div>
+                                    <div class="chart-segment other" style="--percentage: 10;"></div>
+                                    <div class="chart-center">
+                                        <span class="chart-total">100</span>
+                                        <span class="chart-label">Threats</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-legend">
+                                <div class="legend-item malware">
+                                    <div class="legend-color"></div>
+                                    <span>Malware</span>
+                                    <span class="legend-value">45%</span>
+                                </div>
+                                <div class="legend-item intrusion">
+                                    <div class="legend-color"></div>
+                                    <span>Intrusion</span>
+                                    <span class="legend-value">30%</span>
+                                </div>
+                                <div class="legend-item phishing">
+                                    <div class="legend-color"></div>
+                                    <span>Phishing</span>
+                                    <span class="legend-value">15%</span>
+                                </div>
+                                <div class="legend-item other">
+                                    <div class="legend-color"></div>
+                                    <span>Other</span>
+                                    <span class="legend-value">10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- System Health -->
+                <section class="system-health">
+                    <div class="section-header">
+                        <h3>
+                            <i class="fas fa-heartbeat"></i>
+                            System Health
+                        </h3>
+                        <span class="health-status good">All Systems Operational</span>
+                    </div>
+                    <div class="health-metrics">
+                        <div class="metric">
+                            <div class="metric-info">
+                                <span class="metric-label">AI Model</span>
+                                <span class="metric-value">Online</span>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-info">
+                                <span class="metric-label">Database</span>
+                                <span class="metric-value">Online</span>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 98%"></div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-info">
+                                <span class="metric-label">API Services</span>
+                                <span class="metric-value">Online</span>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 99%"></div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-info">
+                                <span class="metric-label">Real-time Processing</span>
+                                <span class="metric-value">Online</span>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Actions -->
+                <section class="quick-actions">
+                    <div class="section-header">
+                        <h3>
+                            <i class="fas fa-rocket"></i>
+                            Quick Actions
+                        </h3>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="startRealtimeMonitoring()">
+                            <div class="action-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <span>Start Real-time Monitor</span>
+                        </button>
+                        <button class="action-btn" onclick="showUploadModal()">
+                            <div class="action-icon">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                            <span>Upload Log Files</span>
+                        </button>
+                        <button class="action-btn" onclick="generateReport()">
+                            <div class="action-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <span>Generate Report</span>
+                        </button>
+                        <button class="action-btn" onclick="viewAlerts()">
+                            <div class="action-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <span>View Alerts</span>
+                        </button>
+                        <button class="action-btn" onclick="manageTeam()">
+                            <div class="action-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span>Team Management</span>
+                        </button>
+                        <button class="action-btn" onclick="systemSettings()">
+                            <div class="action-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <span>System Settings</span>
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Real-time Monitor -->
+            <section class="realtime-monitor">
+                <div class="section-header">
+                    <h3>
+                        <i class="fas fa-broadcast-tower"></i>
+                        Real-time Threat Monitor
+                    </h3>
+                    <div class="monitor-controls">
+                        <button class="btn btn-success" id="startMonitorBtn" onclick="startRealtimeMonitoring()">
+                            <i class="fas fa-play"></i>
+                            Start Monitor
+                        </button>
+                        <button class="btn btn-danger" id="stopMonitorBtn" onclick="stopRealtimeMonitoring()" disabled>
+                            <i class="fas fa-stop"></i>
+                            Stop Monitor
+                        </button>
+                    </div>
+                </div>
+                <div class="monitor-content">
+                    <div class="monitor-stats">
+                        <div class="monitor-stat">
+                            <span class="stat-value" id="threatsDetected">0</span>
+                            <span class="stat-label">Threats Detected</span>
+                        </div>
+                        <div class="monitor-stat">
+                            <span class="stat-value" id="activeConnections">0</span>
+                            <span class="stat-label">Active Connections</span>
+                        </div>
+                        <div class="monitor-stat">
+                            <span class="stat-value" id="networkThroughput">0 MB/s</span>
+                            <span class="stat-label">Network Throughput</span>
+                        </div>
+                        <div class="monitor-stat">
+                            <span class="stat-value" id="processingTime">0ms</span>
+                            <span class="stat-label">Avg. Processing Time</span>
+                        </div>
+                    </div>
+                    <div class="threats-feed" id="threatsFeed">
+                        <div class="feed-placeholder">
+                            <i class="fas fa-broadcast-tower"></i>
+                            <p>Real-time monitoring is inactive</p>
+                            <small>Start monitoring to see live threat detection</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-upload"></i>
+                    Upload Files for Analysis
+                </h3>
+                <button class="close" onclick="closeUploadModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <p>Drag & drop your log files here or click to browse</p>
+                    <p class="upload-info">Supported formats: CSV, JSON, TXT, LOG (Max 100MB)</p>
+                    <input type="file" id="fileInput" multiple accept=".csv,.json,.txt,.log" style="display: none;">
+                    <button class="btn btn-outline" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-folder-open"></i>
+                        Browse Files
+                    </button>
+                </div>
+                <div class="file-list" id="fileList"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeUploadModal()">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+                <button class="btn btn-primary" onclick="analyzeFiles()" id="analyzeBtn" disabled>
+                    <i class="fas fa-play"></i>
+                    Analyze Files
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/realtime.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
